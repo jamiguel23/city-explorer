@@ -9,6 +9,11 @@ export default class App extends Component {
       queryCity: ''
     }
   }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+      this.setState({ queryCity: e.target.city.value})
+}
   render() {
     return (
       <div>
