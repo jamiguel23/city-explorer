@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 import axios from 'axios';
 
@@ -49,7 +48,7 @@ export default class App extends Component {
         : <p> Search for a city to explore</p>}
         {this.state.error && <p> Type in a city, there was an error in your input</p>};
 
-        <img src={ `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITY_EXPLORER_KEY}&center=${this.state.locationObject.lat},${this.state.locationObject.lon}&zoom=12&size=<width>x<height>&format=<format>&maptype=<MapType>&markers=icon:<icon>|<latitude>,<longitude>&markers=icon:<icon>|<latitude>,<longitude>`} atl ='map of a city'/>
+        <img src={ `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITY_EXPLORER_KEY}&center=${this.state.locationObject.lat},${this.state.locationObject.lon}&zoom=12&size=<width>x<height>&format=<format>&maptype=<MapType>&markers=icon:<icon>|<latitude>,<longitude>&markers=icon:<icon>|<latitude>,<longitude>`} alt ='map of a city'/>
       </div>
     )
   }
