@@ -11,6 +11,8 @@ export default class App extends Component {
     this.state ={
       queryCity: '',
       locationObject: {},
+      lat :{},
+      long: {},
       error :false
     }
   }
@@ -44,7 +46,7 @@ export default class App extends Component {
 
         </form>
 
-        {this.state.locationObject.display_name? <p> {this.state.locationObject.display_name} </p> : <p> Search for a city to explore</p>}
+        {this.state.locationObject.display_name? <p> {this.state.locationObject.display_name} Lat -{this.state.locationObject.lat} Long:{this.state.locationObject.lon} </p> : <p> Search for a city to explore</p>}
         {this.state.error && <p> Type in a city, there was an error in your input</p>};
       </div>
     )
