@@ -37,6 +37,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
+        <h1> City Explorer</h1>
         <form onSubmit={this.handleSubmit}> 
 
         <input type="text" placeholder="city name" name="city"></input>
