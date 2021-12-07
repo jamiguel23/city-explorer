@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+*{
+  background-color: goldenrod;
+}
+div {
+  background-color:fuchsia;
+  text-align: center;
+  margin-top: 10%;
+  
+}
+
+p, form{ 
+  background-color: fuchsia;
+}
