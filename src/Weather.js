@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { Component } from 'react'
+import axios from 'axios';
 
 export default class Weather extends Component {
 
@@ -12,13 +12,15 @@ export default class Weather extends Component {
 
 
   weatherRequest = async() => {
-    const weatherInfo = await axios.get(`${process.env.REACT_APP_URL}/weather`)
+    const weatherInfo = await axios.get(`${process.env.REACT_APP_URL}/weather?city_name=${this.props.queryCity}`)
     this.setState({ weather : weatherInfo.data})
+    console.log(this.state.weather)
   }
 
   componentDidMount() {
     this.weatherRequest();
   }
+  
 
   render() {
     return (
@@ -27,7 +29,7 @@ export default class Weather extends Component {
         <h3> The Weather in a city </h3>
 
         <ul> 
-          {this.state.weather.length > 0 && this.state.weather.map(item => <li>{item}</li>)}
+          {this.state.weather.length > 0 && this.state.weather.map(item => <li></li>)}
         </ul>
 
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import Weather from './Weather';
 
 export default class Form extends Component {
 
@@ -9,16 +10,19 @@ export default class Form extends Component {
     this.state = {
       queryCity: '',
       locationObject: {},
+      weather: [],
       error: false
     }
   }
+
+
 
   getLocation = async () => {
     try {
 
       let cityResult = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_CITY_EXPLORER_KEY}&q=${this.state.queryCity}&format=json`)
       console.log(cityResult.data[0]);
-      this.setState({ locationObject: cityResult.data[0] })
+      this.setState({ locationObject: cityResult.data[0]})
 
     } catch (error) {
       console.log(error);
@@ -32,11 +36,11 @@ export default class Form extends Component {
     this.setState({ queryCity: e.target.city.value }, this.getLocation)
     // console.log(this.state.queryCity);
   }
-
   render() {
     return (
       <div>
         <h1> City Explorer</h1>
+        <Weather queryCity = {this.state.queryCity} />
         <form onSubmit={this.handleSubmit}>
 
           <input type="text" placeholder="city name" name="city"></input>
