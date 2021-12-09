@@ -26,7 +26,7 @@ export default class Weather extends Component {
     return (
       <div>
         
-        <h3> The Weather in a city </h3>
+        <h3> The Weather in the searched city </h3>
 
         <ul> 
           {this.props.weather.map(day => <li key={day.date}> {day.date} : {day.description}</li>)}

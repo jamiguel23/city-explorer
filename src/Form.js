@@ -36,7 +36,7 @@ export default class Form extends Component {
 
   weatherRequest = async() => {
 
-    let city = this.state.locationObject.display_name.split(',')[0]
+    let city = this.state.locationObject.display_name.split(',')[0];
     let url = `${process.env.REACT_APP_URL}/weather?city_name=${city}`;
 
     try{
@@ -48,6 +48,7 @@ export default class Form extends Component {
 
     } catch (e){
       this.setState({error :false})
+      this.setState({ weather : []})
     }
   }
 
