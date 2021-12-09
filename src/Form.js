@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Weather from './Weather';
+import Movies from './Movies';
 
 
 export default class Form extends Component {
@@ -36,8 +37,8 @@ export default class Form extends Component {
 
   weatherRequest = async() => {
 
-    let city = this.state.locationObject.display_name.split(',')[0];
-    let url = `${process.env.REACT_APP_URL}/weather?city_name=${city}`;
+    // let city = this.state.locationObject.display_name.split(',')[0];
+    let url = `${process.env.REACT_APP_URL}/weather?lat=${this.state.locationObject.lat}&lon=${this.state.locationObject.lon}`;
 
     try{
       let results = await axios.get(url);
@@ -75,6 +76,8 @@ export default class Form extends Component {
         <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITY_EXPLORER_KEY}&center=${this.state.locationObject.lat},${this.state.locationObject.lon}&zoom=12&size=<width>x<height>&format=<format>&maptype=<MapType>&markers=icon:<icon>|<latitude>,<longitude>&markers=icon:<icon>|<latitude>,<longitude>`} alt='map of a city' />
 
         {this.state.weather.length > 0 && <Weather weather = {this.state.weather}/>}
+
+        <Movies/>
 
       </div>
     )
