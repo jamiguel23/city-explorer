@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import Weather from './Weather';
 
+
 export default class Form extends Component {
 
 
@@ -22,12 +23,31 @@ export default class Form extends Component {
 
       let cityResult = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_CITY_EXPLORER_KEY}&q=${this.state.queryCity}&format=json`)
       console.log(cityResult.data[0]);
-      this.setState({ locationObject: cityResult.data[0]})
+      this.setState({ locationObject: cityResult.data[0]}, this.weatherRequest)
+      this.setState({error:false});
+
 
     } catch (error) {
       console.log(error);
       console.log('there was an error')
       this.setState({ error: true })
+    }
+  }
+
+  weatherRequest = async() => {
+
+    let city = this.state.locationObject.display_name.split(',')[0]
+    let url = `${process.env.REACT_APP_URL}/weather?city_name=${city}`;
+
+    try{
+      let results = await axios.get(url);
+      this.setState({ weather : results.data})
+      console.log(this.state.weather)
+      this.setState({error:false});
+
+
+    } catch (e){
+      this.setState({error :false})
     }
   }
 
@@ -40,7 +60,6 @@ export default class Form extends Component {
     return (
       <div>
         <h1> City Explorer</h1>
-        <Weather queryCity = {this.state.queryCity} />
         <form onSubmit={this.handleSubmit}>
 
           <input type="text" placeholder="city name" name="city"></input>
@@ -53,6 +72,9 @@ export default class Form extends Component {
         {this.state.error && <p> Type in a city, there was an error in your input</p>};
 
         <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITY_EXPLORER_KEY}&center=${this.state.locationObject.lat},${this.state.locationObject.lon}&zoom=12&size=<width>x<height>&format=<format>&maptype=<MapType>&markers=icon:<icon>|<latitude>,<longitude>&markers=icon:<icon>|<latitude>,<longitude>`} alt='map of a city' />
+
+        {this.state.weather.length > 0 && <Weather weather = {this.state.weather}/>}
+
       </div>
     )
   }
