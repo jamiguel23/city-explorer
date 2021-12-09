@@ -16,13 +16,13 @@ export default class Movies extends Component {
     return (
       <div>
         
-        <h3> Here is a list of movies set in your searched city</h3>
+        <h3> {this.props.movie.title}</h3>
+        <img src={this.props.movie.image_url} alt = {this.props.movie.overview}/>
+        <p> {this.props.movie.overview}</p>
 
         <ol> 
 
         </ol>
-
-
 
       </div>
     )
