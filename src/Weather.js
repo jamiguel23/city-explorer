@@ -11,26 +11,17 @@ export default class Weather extends Component {
   }
 
 
-  // weatherRequest = async() => {
-  //   const weatherInfo = await axios.get(`${process.env.REACT_APP_URL}/weather?city_name=${this.props.queryCity}`)
-  //   this.setState({ weather : weatherInfo.data})
-  //   console.log(this.state.weather)
-  // }
-
-  // componentDidMount() {
-  //   this.weatherRequest();
-  // }
   
 
   render() {
     return (
       <div>
         
-        <h3> The Weather in the searched city </h3>
+        <h3> Here is the 16 day forecast for your searched city! </h3>
 
-        <ul> 
+        <ol> 
           {this.props.weather.map(day => <li key={day.date}> {day.date} : {day.description}</li>)}
-        </ul>
+        </ol>
 
 
 

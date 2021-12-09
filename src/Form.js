@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Weather from './Weather';
+import Movies from './Movies';
 
 
 export default class Form extends Component {
@@ -12,6 +13,7 @@ export default class Form extends Component {
       queryCity: '',
       locationObject: {},
       weather: [],
+      movies: [],
       error: false
     }
   }
@@ -23,8 +25,8 @@ export default class Form extends Component {
 
       let cityResult = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_CITY_EXPLORER_KEY}&q=${this.state.queryCity}&format=json`)
       console.log(cityResult.data[0]);
-      this.setState({ locationObject: cityResult.data[0]}, this.weatherRequest)
-      this.setState({error:false});
+      this.setState({ locationObject: cityResult.data[0] }, this.getAllInfo)
+      this.setState({ error: false });
 
 
     } catch (error) {
@@ -34,22 +36,43 @@ export default class Form extends Component {
     }
   }
 
-  weatherRequest = async() => {
 
-    let city = this.state.locationObject.display_name.split(',')[0];
-    let url = `${process.env.REACT_APP_URL}/weather?city_name=${city}`;
+  weatherRequest = async () => {
 
-    try{
+    // let city = this.state.locationObject.display_name.split(',')[0];
+    let url = `${process.env.REACT_APP_URL}/weather?lat=${this.state.locationObject.lat}&lon=${this.state.locationObject.lon}`;
+
+    try {
       let results = await axios.get(url);
-      this.setState({ weather : results.data})
+      this.setState({ weather: results.data })
       console.log(this.state.weather)
-      this.setState({error:false});
+      this.setState({ error: false });
 
 
-    } catch (e){
-      this.setState({error :false})
-      this.setState({ weather : []})
+    } catch (e) {
+      this.setState({ error: false })
+      this.setState({ weather: [] })
     }
+  }
+
+  getMovies = async () => {
+
+    try {
+      const city_name = this.state.locationObject.display_name.split(',')[0];
+      const url = `${process.env.REACT_APP_URL}/movie?city_name=${city_name}`;
+      let movieRes = await axios.get(url);
+      console.log(this.state.movies)
+      this.setState({ movies: movieRes.data })
+
+    } catch(e) {
+    this.setState({ error: false })
+    this.setState({ movies: [] })
+    }
+  }
+
+  getAllInfo = () => {
+    this.weatherRequest();
+    this.getMovies();
   }
 
   handleSubmit = (e) => {
@@ -74,7 +97,9 @@ export default class Form extends Component {
 
         <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITY_EXPLORER_KEY}&center=${this.state.locationObject.lat},${this.state.locationObject.lon}&zoom=12&size=<width>x<height>&format=<format>&maptype=<MapType>&markers=icon:<icon>|<latitude>,<longitude>&markers=icon:<icon>|<latitude>,<longitude>`} alt='map of a city' />
 
-        {this.state.weather.length > 0 && <Weather weather = {this.state.weather}/>}
+        {this.state.weather.length > 0 && <Weather weather={this.state.weather} />}
+
+        {this.state.movies.length > 0 && this.state.movies.map(movie => <Movies movie={movie} />)}
 
       </div>
     )
