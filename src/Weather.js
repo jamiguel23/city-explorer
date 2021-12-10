@@ -10,9 +10,6 @@ export default class Weather extends Component {
     }
   }
 
-
-  
-
   render() {
     return (
       <div>
@@ -22,8 +19,6 @@ export default class Weather extends Component {
         <ol> 
           {this.props.weather.map(day => <li key={day.date}> {day.date} : {day.description}</li>)}
         </ol>
-
-
 
       </div>
     )
