@@ -1,29 +1,11 @@
 import React, { Component } from 'react'
+import Movie from './Movie'
 
 export default class Movies extends Component {
-
-  constructor(props){
-    super(props);
-    this.state = {
-  
-    }
-  }
-
-
-  
-
   render() {
     return (
       <div>
-        
-        <h3> {this.props.movie.title}</h3>
-        <img src={this.props.movie.image_url} alt = {this.props.movie.overview}/>
-        <p> {this.props.movie.overview}</p>
-
-        <ol> 
-
-        </ol>
-
+          {this.props.movies.length > 0 && this.props.movies.map(movie => <Movie movie={movie} />)}
       </div>
     )
   }

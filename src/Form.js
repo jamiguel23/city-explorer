@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import Weather from './Weather';
 import Movies from './Movies';
+import WeatherDay from './WeatherDay';
 
 
 export default class Form extends Component {
-
 
   constructor(props) {
     super(props);
@@ -17,8 +16,6 @@ export default class Form extends Component {
       error: false
     }
   }
-
-
 
   getLocation = async () => {
     try {
@@ -78,7 +75,6 @@ export default class Form extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.setState({ queryCity: e.target.city.value }, this.getLocation)
-    // console.log(this.state.queryCity);
   }
   render() {
     return (
@@ -97,9 +93,8 @@ export default class Form extends Component {
 
         <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITY_EXPLORER_KEY}&center=${this.state.locationObject.lat},${this.state.locationObject.lon}&zoom=12&size=<width>x<height>&format=<format>&maptype=<MapType>&markers=icon:<icon>|<latitude>,<longitude>&markers=icon:<icon>|<latitude>,<longitude>`} alt='map of a city' />
 
-        {this.state.weather.length > 0 && <Weather weather={this.state.weather} />}
-
-        {this.state.movies.length > 0 && this.state.movies.map(movie => <Movies movie={movie} />)}
+      <WeatherDay weather = {this.state.weather} />
+      <Movies movies = {this.state.movies} />
 
       </div>
     )

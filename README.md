@@ -11,6 +11,8 @@ Deployed page https://city-explorer-jamiguel23.netlify.app/
 
 ### Lab 6 wireframe
 ![Lab 6 Wireframe](lab6-wireframe.png)
+### lab 9 Wirefarame
+![Lab 9 Wireframe](lab9-wireframe.png)
 
 ## Architecture
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
@@ -23,3 +25,4 @@ Deployed page https://city-explorer-jamiguel23.netlify.app/
 ## Credit and Collaborations
 
 - Lab6 WireFrame exercise with Rey Mercado
+- Lab9 WireFrame with Jacob Choi
