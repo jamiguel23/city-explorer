@@ -40,7 +40,7 @@ export default class Form extends Component {
   weatherRequest = async () => {
 
     // let city = this.state.locationObject.display_name.split(',')[0];
-    let url = `${process.env.REACT_APP_URL}/weather?lat=${this.state.locationObject.lat}&lon=${this.state.locationObject.lon}`;
+    let url = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.locationObject.lat}&lon=${this.state.locationObject.lon}`;
 
     try {
       let results = await axios.get(url);
@@ -59,7 +59,7 @@ export default class Form extends Component {
 
     try {
       const city_name = this.state.locationObject.display_name.split(',')[0];
-      const url = `${process.env.REACT_APP_URL}/movie?city_name=${city_name}`;
+      const url = `${process.env.REACT_APP_SERVER}/movie?city_name=${city_name}`;
       let movieRes = await axios.get(url);
       console.log(this.state.movies)
       this.setState({ movies: movieRes.data })
