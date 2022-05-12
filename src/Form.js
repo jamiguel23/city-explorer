@@ -44,7 +44,7 @@ export default class Form extends Component {
       this.setState({ weather: results.data })
       console.log(this.state.weather)
       this.setState({ error: false });
-
+      //comment 
 
     } catch (e) {
       this.setState({ error: false })
